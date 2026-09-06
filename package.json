@@ -2,7 +2,7 @@
   "name": "frontmatter-studio",
   "displayName": "Frontmatter Studio",
   "description": "A RTL-friendly frontmatter editor for Markdown files, developed by Generalsoft FZ-LLC.",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "publisher": "generalsoft",
   "license": "MIT",
   "repository": {
