@@ -1,0 +1,57 @@
+{
+  "name": "frontmatter-studio",
+  "displayName": "Frontmatter Studio",
+  "description": "A RTL-friendly frontmatter editor for Markdown files, developed by Generalsoft FZ-LLC.",
+  "version": "0.0.1",
+  "publisher": "generalsoft",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/generalsoft/frontmatter-studio.git"
+  },
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "icon": "images/icon.png",
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "frontmatterStudio.openEditor",
+        "title": "Frontmatter Studio: Open Editor"
+      },
+      {
+        "command": "frontmatterStudio.validate",
+        "title": "Frontmatter Studio: Validate Frontmatter"
+      }
+    ],
+    "menus": {
+      "editor/title": [
+        {
+          "command": "frontmatterStudio.openEditor",
+          "when": "resourceExtname == .md",
+          "group": "navigation"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "clean": "rm -rf dist *.vsix",
+    "compile": "tsc -p ./",
+    "package": "npm run clean && npm run compile && vsce package",
+    "prepublishOnly": "npm run compile"
+  },
+  "devDependencies": {
+    "@types/js-yaml": "^4.0.9",
+    "@types/node": "^20.19.43",
+    "@types/vscode": "^1.85.0",
+    "@vscode/vsce": "^2.26.0",
+    "typescript": "^5.3.0"
+  },
+  "dependencies": {
+    "js-yaml": "^4.1.0"
+  }
+}
