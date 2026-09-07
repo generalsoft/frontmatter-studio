@@ -69,6 +69,11 @@ function parseDocument(doc) {
     const metadata = loaded && typeof loaded === "object"
         ? loaded
         : {};
+    // Markdown stores thumbnail paths with a leading slash.
+    // The editor works with project-relative paths instead.
+    if (typeof metadata.thumbnail === "string") {
+        metadata.thumbnail = metadata.thumbnail.replace(/^\/+/, "");
+    }
     return {
         metadata,
         body: match[2]
@@ -83,7 +88,13 @@ function parseDocument(doc) {
  */
 function serialize(metadata, body) {
     const metadataWithoutTags = {
-        ...metadata
+        ...metadata,
+        // Markdown/web output requires a leading slash.
+        ...(typeof metadata.thumbnail === "string" && metadata.thumbnail.trim()
+            ? {
+                thumbnail: `/${metadata.thumbnail.replace(/^\/+/, "")}`
+            }
+            : {})
     };
     const tags = Array.isArray(metadataWithoutTags.tags)
         ? metadataWithoutTags.tags
@@ -297,8 +308,9 @@ async function openEditor(context) {
                 relativePath =
                     path.relative(path.dirname(documentUri.fsPath), selected.fsPath);
             }
-            relativePath =
-                relativePath.replace(/\\/g, "/");
+            relativePath = relativePath
+                .replace(/\\/g, "/")
+                .replace(/^\/+/, "");
             const preview = panel.webview
                 .asWebviewUri(selected)
                 .toString();
@@ -555,6 +567,11 @@ function html(webview, metadata, initialThumbnailPreview, fileName) {
 
       text-align: left;
 
+      cursor: pointer;
+    }
+
+    input[type="date"]::-webkit-calendar-picker-indicator {
+      filter: invert(0.8);
       cursor: pointer;
     }
 
