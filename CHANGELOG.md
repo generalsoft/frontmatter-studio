@@ -4,6 +4,18 @@ All notable changes to **Frontmatter Studio** are documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project follows Semantic Versioning.
 
+## [0.1.5] - 2026-09-07
+
+### Changed
+
+* Improved the calendar icon visibility in dark theme for clearer date selection.
+
+### Fixed
+
+* Project-relative thumbnail paths in the editor, with a leading / added when saving to Markdown for web page rendering.
+* Thumbnail paths being displayed with a leading / in the editor.
+* Thumbnail paths being saved without the leading / required by the web page.
+
 ## [0.1.0] - 2026-09-07
 
 ### Added
